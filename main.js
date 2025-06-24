@@ -1,19 +1,29 @@
 const { app, BrowserWindow } = require('electron');
-const path = require('path');
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    },
-    icon: './assets/icon.svg' // 设置窗口图标
+      nodeIntegration: false,
+      contextIsolation: true
+    }
   });
 
-  // 加载主页面
-  mainWindow.loadFile('index.html');
+  // 开发环境用 Vite dev server
+  win.loadURL('http://localhost:5173');
+
+  
+  // F12 打开开发者工具
+  win.webContents.on('before-input-event', (event, input) => {
+    if (
+      (input.key === 'F12' && input.type === 'keyDown') ||
+      (input.key.toLowerCase() === 'i' && input.control && input.shift && input.type === 'keyDown')
+    ) {
+      win.webContents.openDevTools({ mode: 'detach' });
+      event.preventDefault();
+    }
+  });
 }
 
 app.whenReady().then(createWindow);

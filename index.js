@@ -1,20 +1,17 @@
 import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css'; // 引入 Ant Design 样式
-import ReactDOM from 'react-dom/client';
 
 function App() {
   return (
     <div>
-      <h1>Electron SVG Icon Demo</h1>
-      <DownOutlined style={{ fontSize: 24 }} />
-      <PlusOutlined style={{ fontSize: 24 }} />
-      <img src="./assets/icon.svg" alt="SVG Icon" style={{ width: 60, height: 60 }} />
+      <h2>Ant Design Icons 示例</h2>
+      <DownOutlined style={{ fontSize: 32, color: '#1677ff', marginRight: 16 }} />
+      <PlusOutlined style={{ fontSize: 32, color: '#1677ff' }} />
     </div>
   );
 }
 
-// 挂载 React 应用
 const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container);
+const root = createRoot(container);
 root.render(<App />);
